@@ -15,9 +15,8 @@ export const signUpSchema = z.object({
     .regex(/^[가-힣a-zA-Z\s]+$/, '이름은 한글, 영문, 공백만 포함할 수 있습니다'),
 
   email: z
-    .string()
-    .min(1, '이메일을 입력해주세요')
     .email('올바른 이메일 형식을 입력해주세요')
+    .min(1, '이메일을 입력해주세요')
     .max(100, '이메일은 100글자를 초과할 수 없습니다'),
 
   password: z
