@@ -1,5 +1,6 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 // import {signInEmail} from "better-auth/api";
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -22,6 +23,7 @@ const SignIn = () => {
       password: '',
     },
     mode: 'onBlur',
+    resolver: zodResolver(signInSchema),
   });
 
   const onSubmit = async (data: SignInFormData) => {
