@@ -2,19 +2,18 @@
 
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useState } from 'react';
-import { type Control, Controller, type FieldError, type Path } from 'react-hook-form';
+import { type Control, Controller, type FieldError, type FieldValues, type Path } from 'react-hook-form';
 import countryList from 'react-select-country-list';
 import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import type { SignUpFormData } from '@/lib/schemas/signup';
 import { cn } from '@/lib/utils';
 
-type CountrySelectProps = {
-  name: Path<SignUpFormData>;
+type CountrySelectProps<T extends FieldValues> = {
+  name: Path<T>;
   label: string;
-  control: Control<SignUpFormData>;
+  control: Control<T>;
   error?: FieldError;
 };
 
@@ -84,7 +83,7 @@ const CountrySelect = ({ value, onChange }: { value: string; onChange: (value: s
   );
 };
 
-export const CountrySelectField = ({ name, label, control, error }: CountrySelectProps) => {
+export const CountrySelectField = <T extends FieldValues>({ name, label, control, error }: CountrySelectProps<T>) => {
   return (
     <div className='space-y-2'>
       <Label htmlFor={name} className='form-label'>
