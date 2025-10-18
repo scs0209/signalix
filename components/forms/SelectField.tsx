@@ -1,22 +1,23 @@
 import { type Control, Controller, type FieldError, type Path } from 'react-hook-form';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import type { SignUpFormData } from '@/lib/schemas/signup';
 
 type Option = {
   value: string;
   label: string;
 };
 
-type SelectFieldProps<T extends Record<string, unknown>> = {
-  name: Path<T>;
+type SelectFieldProps = {
+  name: Path<SignUpFormData>;
   label: string;
   placeholder: string;
   options: readonly Option[];
-  control: Control<T>;
+  control: Control<SignUpFormData>;
   error?: FieldError;
 };
 
-const SelectField = <T extends Record<string, unknown>>({ name, label, placeholder, options, control, error }: SelectFieldProps<T>) => {
+const SelectField = ({ name, label, placeholder, options, control, error }: SelectFieldProps) => {
   return (
     <div className='space-y-2'>
       <Label htmlFor={name} className='form-label'>

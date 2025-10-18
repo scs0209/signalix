@@ -1,29 +1,21 @@
-import type { FieldError, UseFormRegister, Path } from 'react-hook-form';
+import type { FieldError, Path, UseFormRegister } from 'react-hook-form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import type { SignUpFormData } from '@/lib/schemas/signup';
 import { cn } from '@/lib/utils';
 
-type FormInputProps<T extends Record<string, unknown>> = {
-  name: Path<T>;
+type FormInputProps = {
+  name: Path<SignUpFormData>;
   label: string;
   placeholder: string;
   type?: string;
-  register: UseFormRegister<T>;
+  register: UseFormRegister<SignUpFormData>;
   error?: FieldError;
   disabled?: boolean;
   value?: string;
 };
 
-const InputField = <T extends Record<string, unknown>>({
-  name,
-  label,
-  placeholder,
-  type = 'text',
-  register,
-  error,
-  disabled,
-  value,
-}: FormInputProps<T>) => {
+const InputField = ({ name, label, placeholder, type = 'text', register, error, disabled, value }: FormInputProps) => {
   return (
     <div className='space-y-2'>
       <Label htmlFor={name} className='form-label'>

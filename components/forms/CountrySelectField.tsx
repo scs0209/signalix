@@ -9,11 +9,12 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
+import type { SignUpFormData } from '@/lib/schemas/signup';
 
-type CountrySelectProps<T extends Record<string, unknown>> = {
-  name: Path<T>;
+type CountrySelectProps = {
+  name: Path<SignUpFormData>;
   label: string;
-  control: Control<T>;
+  control: Control<SignUpFormData>;
   error?: FieldError;
 };
 
@@ -83,7 +84,12 @@ const CountrySelect = ({ value, onChange }: { value: string; onChange: (value: s
   );
 };
 
-export const CountrySelectField = <T extends Record<string, unknown>>({ name, label, control, error }: CountrySelectProps<T>) => {
+export const CountrySelectField = ({
+  name,
+  label,
+  control,
+  error,
+}: CountrySelectProps) => {
   return (
     <div className='space-y-2'>
       <Label htmlFor={name} className='form-label'>
