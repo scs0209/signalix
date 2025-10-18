@@ -8,8 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
 import type { SignUpFormData } from '@/lib/schemas/signup';
+import { cn } from '@/lib/utils';
 
 type CountrySelectProps = {
   name: Path<SignUpFormData>;
@@ -84,12 +84,7 @@ const CountrySelect = ({ value, onChange }: { value: string; onChange: (value: s
   );
 };
 
-export const CountrySelectField = ({
-  name,
-  label,
-  control,
-  error,
-}: CountrySelectProps) => {
+export const CountrySelectField = ({ name, label, control, error }: CountrySelectProps) => {
   return (
     <div className='space-y-2'>
       <Label htmlFor={name} className='form-label'>
