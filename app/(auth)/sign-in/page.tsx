@@ -1,14 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-// import {signInEmail} from "better-auth/api";
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
-// import {signInWithEmail, signUpWithEmail} from "@/lib/actions/auth.actions";
 import { toast } from 'sonner';
 import FooterLink from '@/components/forms/FooterLink';
 import InputField from '@/components/forms/InputField';
 import { Button } from '@/components/ui/button';
+import { signInWithEmail } from '@/lib/actions/auth.actions';
 import { type SignInFormData, signInSchema } from '@/lib/schemas/signIn';
 
 const SignIn = () => {
@@ -27,20 +26,17 @@ const SignIn = () => {
   });
 
   const onSubmit = async (data: SignInFormData) => {
-    console.log(data);
+    try {
+      const result = await signInWithEmail(data);
+      toast.success('로그인이 완료되었습니다!');
+      if (result.success) router.push('/');
+    } catch (e) {
+      console.error(e);
+      toast.error('Sign in failed', {
+        description: e instanceof Error ? e.message : 'Failed to sign in.',
+      });
+    }
   };
-
-  // const onSubmit = async (data: SignInFormData) => {
-  //     try {
-  //         const result = await signInWithEmail(data);
-  //         if(result.success) router.push('/');
-  //     } catch (e) {
-  //         console.error(e);
-  //         toast.error('Sign in failed', {
-  //             description: e instanceof Error ? e.message : 'Failed to sign in.'
-  //         })
-  //     }
-  // }
 
   return (
     <>
