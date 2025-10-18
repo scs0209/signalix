@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import FooterLink from '@/components/forms/FooterLink';
 import InputField from '@/components/forms/InputField';
 import { Button } from '@/components/ui/button';
-import { type SignInFormData, signInSchema } from '@/lib/schemas/signin';
+import { type SignInFormData, signInSchema } from '@/lib/schemas/signIn';
 
 const SignIn = () => {
   const router = useRouter();
