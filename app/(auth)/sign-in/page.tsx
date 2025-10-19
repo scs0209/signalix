@@ -28,8 +28,14 @@ const SignIn = () => {
   const onSubmit = async (data: SignInFormData) => {
     try {
       const result = await signInWithEmail(data);
-      toast.success('로그인이 완료되었습니다!');
-      if (result.success) router.push('/');
+      if (result.success) {
+        toast.success('로그인이 완료되었습니다!');
+        router.push('/');
+      } else {
+        toast.error('로그인에 실패했습니다', {
+          description: result.error || '로그인에 실패했습니다.',
+        });
+      }
     } catch (e) {
       console.error(e);
       toast.error('Sign in failed', {
