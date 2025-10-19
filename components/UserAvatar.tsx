@@ -16,7 +16,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { signOut } from '@/lib/actions/auth.actions';
 
-const UserAvatar = ({ user }: { user: User }) => {
+interface UserAvatarProps {
+  user: User;
+}
+
+const UserAvatar = ({ user }: UserAvatarProps) => {
   const router = useRouter();
 
   const handleSignOut = async () => {
