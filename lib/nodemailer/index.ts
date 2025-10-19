@@ -1,11 +1,17 @@
 import nodemailer from 'nodemailer';
 import { NEWS_SUMMARY_EMAIL_TEMPLATE, WELCOME_EMAIL_TEMPLATE } from '@/lib/nodemailer/templates';
 
+const { NODEMAILER_EMAIL, NODEMAILER_PASSWORD } = process.env;
+
+if (!NODEMAILER_EMAIL || !NODEMAILER_PASSWORD) {
+  throw new Error('NODEMAILER_EMAIL and NODEMAILER_PASSWORD must be set');
+}
+
 export const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.NODEMAILER_EMAIL!,
-    pass: process.env.NODEMAILER_PASSWORD!,
+    user: NODEMAILER_EMAIL,
+    pass: NODEMAILER_PASSWORD,
   },
 });
 
@@ -13,7 +19,7 @@ export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData)
   const htmlTemplate = WELCOME_EMAIL_TEMPLATE.replace('{{name}}', name).replace('{{intro}}', intro);
 
   const mailOptions = {
-    from: `"Signalix" <signalix@jsmastery.pro>`,
+    from: `"Signalix" <${NODEMAILER_EMAIL}>`,
     to: email,
     subject: `Welcome to Signalix - your stock market toolkit is ready!`,
     text: 'Thanks for joining Signalix',
@@ -35,7 +41,7 @@ export const sendNewsSummaryEmail = async ({
   const htmlTemplate = NEWS_SUMMARY_EMAIL_TEMPLATE.replace('{{date}}', date).replace('{{newsContent}}', newsContent);
 
   const mailOptions = {
-    from: `"Signalist News" <signalist@jsmastery.pro>`,
+    from: `"Signalist News" <${NODEMAILER_EMAIL}>`,
     to: email,
     subject: `📈 Market News Summary Today - ${date}`,
     text: `Today's market news summary from Signalist`,
