@@ -94,14 +94,20 @@ export const sendDailyNewsSummary = inngest.createFunction(
       try {
         const prompt = NEWS_SUMMARY_EMAIL_PROMPT.replace('{{newsData}}', JSON.stringify(articles, null, 2));
 
-        const response = await step.ai.infer(`summarize-news-${user.email}`, {
-          model: step.ai.models.gemini({ model: 'gemini-2.5-flash-lite' }),
-          body: {
-            contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          },
-        });
+        let response = null;
+        try {
+          response = await step.ai.infer(`summarize-news-${user.email}`, {
+            model: step.ai.models.gemini({ model: 'gemini-2.5-flash-lite' }),
+            body: {
+              contents: [{ role: 'user', parts: [{ text: prompt }] }],
+            },
+          });
+        } catch (e) {
+          console.error('Failed to summarize news for : ', user.email);
+          response = null;
+        }
 
-        const part = response.candidates?.[0]?.content?.parts?.[0];
+        const part = response?.candidates?.[0]?.content?.parts?.[0];
         const newsContent = (part && 'text' in part ? part.text : null) || 'No market news.';
 
         userNewsSummaries.push({ user, newsContent });
