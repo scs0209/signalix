@@ -44,10 +44,10 @@ export const sendNewsSummaryEmail = async ({
   const htmlTemplate = NEWS_SUMMARY_EMAIL_TEMPLATE.replace('{{date}}', date).replace('{{newsContent}}', newsContent);
 
   const mailOptions = {
-    from: `"Signalist News" <signalist@jsmastery.pro>`,
+    from: `"Signalix News" <${NODEMAILER_EMAIL}>`,
     to: email,
-    subject: `📈 Market News Summary Today - ${date}`,
-    text: `Today's market news summary from Signalist`,
+    subject: `📈 오늘의 마켓 뉴스 요약 - ${date}`,
+    text: `Signalix의 오늘의 마켓 뉴스 요약`,
     html: htmlTemplate,
   };
 
