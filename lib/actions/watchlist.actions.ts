@@ -3,6 +3,12 @@
 import { Watchlist } from '@/database/models/watchlist.model';
 import { connectToDatabase } from '@/database/mongoose';
 
+/**
+ * Retrieve the watchlist symbols associated with a user's email.
+ *
+ * @param email - The user's email address to look up
+ * @returns An array of watchlist symbol strings for the specified user. Returns an empty array if the email is falsy, no user is found, or an error occurs.
+ */
 export async function getWatchlistSymbolsByEmail(email: string): Promise<string[]> {
   if (!email) return [];
 

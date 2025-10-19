@@ -7,6 +7,13 @@ import { formatArticle, getDateRange, validateArticle } from '@/lib/utils';
 const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY ?? '';
 
+/**
+ * Fetches JSON from the given URL and returns the parsed response, using optional cache revalidation.
+ *
+ * @param revalidateSeconds - If provided, enables caching with a revalidation interval in seconds; otherwise disables caching.
+ * @returns The parsed JSON response cast to `T`.
+ * @throws `Error` when the HTTP response status is not OK; the error message contains the status code and any available response body text.
+ */
 async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T> {
   const options: RequestInit & { next?: { revalidate?: number } } = revalidateSeconds
     ? { cache: 'force-cache', next: { revalidate: revalidateSeconds } }
@@ -22,6 +29,13 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
 
 export { fetchJSON };
 
+/**
+ * Fetches market news, prioritizing company-specific articles for the provided symbols and falling back to general market headlines.
+ *
+ * @param symbols - Optional list of stock symbols to prioritize for company news; each symbol is normalized by trimming and uppercasing.
+ * @returns An array of formatted MarketNewsArticle objects (up to 6), sorted by newest first.
+ * @throws {Error} If the FINNHUB API key is not configured or if fetching/processing news fails.
+ */
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
   try {
     const range = getDateRange(5);
