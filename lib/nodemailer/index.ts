@@ -15,8 +15,11 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
+const htmlEscape = (s: string) =>
+  s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
 export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData) => {
-  const htmlTemplate = WELCOME_EMAIL_TEMPLATE.replace('{{name}}', name).replace('{{intro}}', intro);
+  const htmlTemplate = WELCOME_EMAIL_TEMPLATE.replaceAll('{{name}}', htmlEscape(name)).replaceAll('{{intro}}', intro);
 
   const mailOptions = {
     from: `"Signalix" <${NODEMAILER_EMAIL}>`,
@@ -41,7 +44,7 @@ export const sendNewsSummaryEmail = async ({
   const htmlTemplate = NEWS_SUMMARY_EMAIL_TEMPLATE.replace('{{date}}', date).replace('{{newsContent}}', newsContent);
 
   const mailOptions = {
-    from: `"Signalist News" <${NODEMAILER_EMAIL}>`,
+    from: `"Signalist News" <signalist@jsmastery.pro>`,
     to: email,
     subject: `📈 Market News Summary Today - ${date}`,
     text: `Today's market news summary from Signalist`,
