@@ -2,6 +2,7 @@
 
 import { LogOut } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import NavItems from '@/components/NavItems';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -13,12 +14,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { signOut } from '@/lib/actions/auth.actions';
 
 const UserAvatar = ({ user }: { user: User }) => {
   const router = useRouter();
 
   const handleSignOut = async () => {
-    router.push('/sign-in');
+    const result = await signOut();
+
+    if (result.success) {
+      toast.success('로그아웃 완료');
+      return router.push('/sign-in');
+    }
+
+    return toast.error('로그아웃에 실패했습니다');
   };
 
   return (
@@ -26,7 +35,7 @@ const UserAvatar = ({ user }: { user: User }) => {
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='flex items-center gap-3 text-gray-4 hover:text-yellow-500'>
           <Avatar className='h-8 w-8'>
-            <AvatarImage src='https://avatars.githubusercontent.com/u/153423955?s=280&v=4' />
+            <AvatarImage src='/profile_img.webp' />
             <AvatarFallback className='bg-yellow-500 text-yellow-900 text-sm font-bold'>{user.name[0]}</AvatarFallback>
           </Avatar>
           <div className='hidden md:flex flex-col items-start'>
@@ -38,7 +47,7 @@ const UserAvatar = ({ user }: { user: User }) => {
         <DropdownMenuLabel>
           <div className='flex relative items-center gap-3 py-2'>
             <Avatar className='h-10 w-10'>
-              <AvatarImage src='https://avatars.githubusercontent.com/u/153423955?s=280&v=4' />
+              <AvatarImage src='/profile_img.webp' />
               <AvatarFallback className='bg-yellow-500 text-yellow-900 text-sm font-bold'>
                 {user.name[0]}
               </AvatarFallback>
