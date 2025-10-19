@@ -5,12 +5,16 @@ export async function middleware(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
   const { pathname } = request.nextUrl;
 
-  // If user has session and tries to access auth pages, redirect to main
-  if (sessionCookie && (pathname === '/sign-in' || pathname === '/sign-up')) {
-    return NextResponse.redirect(new URL('/', request.url));
+  // Auth pages: allow access only without session
+  if (pathname === '/sign-in' || pathname === '/sign-up') {
+    if (sessionCookie) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+
+    return NextResponse.next();
   }
 
-  // Check cookie presence - prevents obviously unauthorized users
+  // Protected routes: require session
   if (!sessionCookie) {
     return NextResponse.redirect(new URL('/sign-in', request.url));
   }
