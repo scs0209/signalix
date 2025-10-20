@@ -33,13 +33,13 @@ const SignIn = () => {
         router.push('/');
       } else {
         toast.error('로그인에 실패했습니다', {
-          description: result.error || '로그인에 실패했습니다.',
+          description: result.error || '이메일 또는 비밀번호를 확인해주세요.',
         });
       }
     } catch (e) {
       console.error(e);
-      toast.error('Sign in failed', {
-        description: e instanceof Error ? e.message : 'Failed to sign in.',
+      toast.error('로그인에 실패했습니다', {
+        description: e instanceof Error ? e.message : '이메일 또는 비밀번호를 확인해주세요.',
       });
     }
   };
