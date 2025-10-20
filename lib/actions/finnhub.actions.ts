@@ -8,11 +8,11 @@ const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY ?? '';
 
 /**
- * Fetches JSON from the given URL and returns the parsed response, using optional cache revalidation.
+ * 주어진 URL에서 JSON을 가져와 파싱된 응답을 반환합니다. 선택적으로 캐시 재검증을 사용할 수 있습니다.
  *
- * @param revalidateSeconds - If provided, enables caching with a revalidation interval in seconds; otherwise disables caching.
- * @returns The parsed JSON response cast to `T`.
- * @throws `Error` when the HTTP response status is not OK; the error message contains the status code and any available response body text.
+ * @param revalidateSeconds - 제공된 경우, 초 단위의 재검증 간격으로 캐싱을 활성화합니다. 제공되지 않으면 캐싱을 비활성화합니다.
+ * @returns `T`로 캐스팅된 파싱된 JSON 응답.
+ * @throws HTTP 응답 상태가 OK가 아닐 때 `Error`를 발생시킵니다. 에러 메시지에는 상태 코드와 사용 가능한 응답 본문 텍스트가 포함됩니다.
  */
 async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T> {
   const options: RequestInit & { next?: { revalidate?: number } } = revalidateSeconds
@@ -30,11 +30,11 @@ async function fetchJSON<T>(url: string, revalidateSeconds?: number): Promise<T>
 export { fetchJSON };
 
 /**
- * Fetches market news, prioritizing company-specific articles for the provided symbols and falling back to general market headlines.
+ * 시장 뉴스를 가져옵니다. 제공된 심볼에 대한 기업별 기사를 우선시하며, 일반 시장 헤드라인으로 대체합니다.
  *
- * @param symbols - Optional list of stock symbols to prioritize for company news; each symbol is normalized by trimming and uppercasing.
- * @returns An array of formatted MarketNewsArticle objects (up to 6), sorted by newest first.
- * @throws {Error} If the FINNHUB API key is not configured or if fetching/processing news fails.
+ * @param symbols - 기업 뉴스 우선순위를 위한 선택적 주식 심볼 목록. 각 심볼은 공백 제거 및 대문자로 정규화됩니다.
+ * @returns 최신순으로 정렬된 포맷팅된 MarketNewsArticle 객체 배열 (최대 6개).
+ * @throws {Error} FINNHUB API 키가 구성되지 않았거나 뉴스 가져오기/처리에 실패한 경우 발생합니다.
  */
 export async function getNews(symbols?: string[]): Promise<MarketNewsArticle[]> {
   try {

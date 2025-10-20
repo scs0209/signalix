@@ -2,10 +2,10 @@ import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
 /**
- * Combine and normalize CSS class name values into a single string suitable for Tailwind.
+ * CSS 클래스명 값들을 결합하고 정규화하여 Tailwind에 적합한 단일 문자열로 만듭니다.
  *
- * @param inputs - One or more class name values (strings, arrays, objects, etc.) to be merged
- * @returns The final class string with duplicate or conflicting Tailwind classes resolved
+ * @param inputs - 병합할 하나 이상의 클래스명 값 (문자열, 배열, 객체 등)
+ * @returns 중복되거나 충돌하는 Tailwind 클래스가 해결된 최종 클래스 문자열
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -28,20 +28,20 @@ export const formatTimeAgo = (timestamp: number) => {
 };
 
 /**
- * Pause execution for a given duration in milliseconds.
+ * 주어진 밀리초 동안 실행을 일시 중지합니다.
  *
- * @param ms - Duration to wait in milliseconds
- * @returns No value
+ * @param ms - 대기할 밀리초 단위 시간
+ * @returns 값 없음
  */
 export function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 /**
- * Format a market capitalization amount into a compact USD currency string.
+ * 시가총액을 간결한 USD 통화 문자열로 포맷팅합니다.
  *
- * @param marketCapUsd - Market capitalization expressed in US dollars
- * @returns A formatted string: `"$X.XXT"` for trillions, `"$X.XXB"` for billions, `"$X.XXM"` for millions, or `"$X.XX"` for values below one million; returns `"N/A"` for non-finite or non-positive inputs
+ * @param marketCapUsd - 미국 달러로 표시된 시가총액
+ * @returns 포맷팅된 문자열: 조 단위는 `"$X.XXT"`, 십억 단위는 `"$X.XXB"`, 백만 단위는 `"$X.XXM"`, 백만 미만은 `"$X.XX"` 형식으로 반환. 유한하지 않거나 양수가 아닌 입력에 대해서는 `"N/A"`를 반환합니다.
  */
 export function formatMarketCapValue(marketCapUsd: number): string {
   if (!Number.isFinite(marketCapUsd) || marketCapUsd <= 0) return 'N/A';
