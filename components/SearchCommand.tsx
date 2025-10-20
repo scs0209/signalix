@@ -1,6 +1,6 @@
 'use client';
 
-import { Loader2, TrendingUp } from 'lucide-react';
+import { Loader2, Star, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -97,7 +97,9 @@ export default function SearchCommand({ renderAs = 'button', label = 'Add stock'
                         {stock.symbol} | {stock.exchange} | {stock.type}
                       </div>
                     </div>
-                    {/*<Star />*/}
+
+                    {/* 즐겨찾기 아이콘 */}
+                    <Star className='h-4 w-4 text-gray-500' />
                   </Link>
                 </li>
               ))}
