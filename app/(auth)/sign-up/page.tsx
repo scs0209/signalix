@@ -1,6 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { CountrySelectField } from '@/components/forms/CountrySelectField';
@@ -8,11 +9,12 @@ import FooterLink from '@/components/forms/FooterLink';
 import InputField from '@/components/forms/InputField';
 import SelectField from '@/components/forms/SelectField';
 import { Button } from '@/components/ui/button';
-// import { signUpWithEmail } from '@/lib/actions/auth.actions';
+import { signUpWithEmail } from '@/lib/actions/auth.actions';
 import { INVESTMENT_GOALS, PREFERRED_INDUSTRIES, RISK_TOLERANCE_OPTIONS } from '@/lib/constants';
 import { type SignUpFormData, signUpSchema } from '@/lib/schemas/signup';
 
 const SignUp = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -35,9 +37,10 @@ const SignUp = () => {
   const onSubmit = async (data: SignUpFormData) => {
     try {
       console.log('Form data:', data);
-      // const result = await signUpWithEmail(data);
-      // if (result.success) router.push('/');
+      const result = await signUpWithEmail(data);
       toast.success('회원가입이 완료되었습니다!');
+
+      if (result.success) router.push('/');
     } catch (e) {
       console.error(e);
       toast.error('회원가입에 실패했습니다', {

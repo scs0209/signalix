@@ -3,7 +3,11 @@ import Link from 'next/link';
 import NavItems from './NavItems';
 import UserAvatar from './UserAvatar';
 
-const Header = () => {
+interface HeaderProps {
+  user: User;
+}
+
+const Header = ({ user }: HeaderProps) => {
   return (
     <header className='sticky top-0 header'>
       <div className='container header-wrapper'>
@@ -15,13 +19,7 @@ const Header = () => {
           <NavItems />
         </nav>
 
-        <UserAvatar
-          user={{
-            id: '1',
-            name: 'John Doe',
-            email: 'john.doe@example.com',
-          }}
-        />
+        <UserAvatar user={user} />
       </div>
     </header>
   );
