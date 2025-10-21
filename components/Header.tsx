@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { searchStocks } from '@/lib/actions/finnhub.actions';
 import NavItems from './NavItems';
 import UserAvatar from './UserAvatar';
 
@@ -7,7 +8,9 @@ interface HeaderProps {
   user: User;
 }
 
-const Header = ({ user }: HeaderProps) => {
+const Header = async ({ user }: HeaderProps) => {
+  const initialStocks = await searchStocks();
+
   return (
     <header className='sticky top-0 header'>
       <div className='container header-wrapper'>
@@ -16,10 +19,10 @@ const Header = ({ user }: HeaderProps) => {
         </Link>
 
         <nav className='hidden sm:block'>
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
 
-        <UserAvatar user={user} />
+        <UserAvatar user={user} initialStocks={initialStocks} />
       </div>
     </header>
   );

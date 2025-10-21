@@ -68,6 +68,12 @@ declare global {
     threshold: number;
     changePercent?: number;
   };
+
+  type SearchCommandProps = {
+    renderAs?: 'button' | 'text';
+    label?: string;
+    initialStocks: StockWithWatchlistStatus[];
+};
 }
 
 export {};

@@ -235,3 +235,78 @@ export const POPULAR_STOCK_SYMBOLS = [
   'GRAB',
   'SE',
 ];
+
+export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
+  symbol: symbol.toUpperCase(),
+  colorTheme: 'dark',
+  isTransparent: true,
+  locale: 'en',
+  width: '100%',
+  height: 170,
+});
+
+const BASE_CHART_WIDGET_CONFIG = (symbol: string) => ({
+  allow_symbol_change: false,
+  calendar: false,
+  hide_side_toolbar: true,
+  hide_top_toolbar: false,
+  hide_legend: false,
+  hide_volume: false,
+  hotlist: false,
+  interval: 'D',
+  locale: 'en',
+  save_image: false,
+  symbol: symbol.toUpperCase(),
+  theme: 'dark',
+  timezone: 'Etc/UTC',
+  backgroundColor: '#141414',
+  gridColor: '#141414',
+  watchlist: [],
+  withdateranges: false,
+  compareSymbols: [],
+  studies: [],
+  width: '100%',
+  height: 600,
+});
+
+export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
+  ...BASE_CHART_WIDGET_CONFIG(symbol),
+  details: true,
+  style: 1,
+});
+export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
+  ...BASE_CHART_WIDGET_CONFIG(symbol),
+  details: false,
+  style: 10,
+});
+
+export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
+  symbol: symbol.toUpperCase(),
+  colorTheme: 'dark',
+  isTransparent: 'true',
+  locale: 'en',
+  width: '100%',
+  height: 400,
+  interval: '1h',
+  largeChartUrl: '',
+});
+
+export const COMPANY_PROFILE_WIDGET_CONFIG = (symbol: string) => ({
+  symbol: symbol.toUpperCase(),
+  colorTheme: 'dark',
+  isTransparent: 'true',
+  locale: 'en',
+  width: '100%',
+  height: 440,
+});
+
+export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
+  symbol: symbol.toUpperCase(),
+  colorTheme: 'dark',
+  isTransparent: 'true',
+  locale: 'en',
+  width: '100%',
+  height: 464,
+  displayMode: 'regular',
+  largeChartUrl: '',
+});
