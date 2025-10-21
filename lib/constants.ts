@@ -245,10 +245,9 @@ export const SYMBOL_INFO_WIDGET_CONFIG = (symbol: string) => ({
   height: 170,
 });
 
-export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
+const BASE_CHART_WIDGET_CONFIG = (symbol: string) => ({
   allow_symbol_change: false,
   calendar: false,
-  details: true,
   hide_side_toolbar: true,
   hide_top_toolbar: false,
   hide_legend: false,
@@ -257,7 +256,6 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
   interval: 'D',
   locale: 'en',
   save_image: false,
-  style: 1,
   symbol: symbol.toUpperCase(),
   theme: 'dark',
   timezone: 'Etc/UTC',
@@ -271,30 +269,15 @@ export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
   height: 600,
 });
 
+export const CANDLE_CHART_WIDGET_CONFIG = (symbol: string) => ({
+  ...BASE_CHART_WIDGET_CONFIG(symbol),
+  details: true,
+  style: 1,
+});
 export const BASELINE_WIDGET_CONFIG = (symbol: string) => ({
-  allow_symbol_change: false,
-  calendar: false,
+  ...BASE_CHART_WIDGET_CONFIG(symbol),
   details: false,
-  hide_side_toolbar: true,
-  hide_top_toolbar: false,
-  hide_legend: false,
-  hide_volume: false,
-  hotlist: false,
-  interval: 'D',
-  locale: 'en',
-  save_image: false,
   style: 10,
-  symbol: symbol.toUpperCase(),
-  theme: 'dark',
-  timezone: 'Etc/UTC',
-  backgroundColor: '#141414',
-  gridColor: '#141414',
-  watchlist: [],
-  withdateranges: false,
-  compareSymbols: [],
-  studies: [],
-  width: '100%',
-  height: 600,
 });
 
 export const TECHNICAL_ANALYSIS_WIDGET_CONFIG = (symbol: string) => ({
