@@ -21,10 +21,10 @@
 
 **Purpose**: 프로젝트 초기화 및 기본 구조
 
-- [ ] T001 Create API route structure for watchlist endpoints
-- [ ] T002 [P] Create Zod schemas for watchlist validation in lib/schemas/watchlist.ts
-- [ ] T003 [P] Create TypeScript types for watchlist in types/watchlist.d.ts
-- [ ] T004 [P] Create toast notification component in components/ui/toast.tsx
+- [x] T001 Create API route structure for watchlist endpoints
+- [x] T002 [P] Create Zod schemas for watchlist validation in lib/schemas/watchlist.ts
+- [x] T003 [P] Create TypeScript types for watchlist in types/watchlist.d.ts
+- [x] T004 [P] Create toast notification component in components/ui/toast.tsx
 
 ---
 
