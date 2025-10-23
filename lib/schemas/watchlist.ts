@@ -4,24 +4,27 @@ import { z } from 'zod';
  * 관심종목 항목 추가를 위한 스키마
  */
 export const AddWatchlistItemSchema = z.object({
-  symbol: z.string()
+  symbol: z
+    .string()
     .min(1, 'Symbol is required')
     .max(10, 'Symbol too long')
-    .transform(val => val.toUpperCase().trim()),
-  company: z.string()
+    .transform((val) => val.toUpperCase().trim()),
+  company: z
+    .string()
     .min(1, 'Company name is required')
     .max(100, 'Company name too long')
-    .transform(val => val.trim())
+    .transform((val) => val.trim()),
 });
 
 /**
  * 관심종목 상태 확인을 위한 스키마
  */
 export const WatchlistStatusSchema = z.object({
-  symbol: z.string()
+  symbol: z
+    .string()
     .min(1, 'Symbol is required')
     .max(10, 'Symbol too long')
-    .transform(val => val.toUpperCase().trim())
+    .transform((val) => val.toUpperCase().trim()),
 });
 
 /**
@@ -30,7 +33,7 @@ export const WatchlistStatusSchema = z.object({
 export const WatchlistItemSchema = z.object({
   symbol: z.string(),
   company: z.string(),
-  addedAt: z.string()
+  addedAt: z.string(),
 });
 
 /**
@@ -40,8 +43,8 @@ export const WatchlistResponseSchema = z.object({
   success: z.literal(true),
   data: z.object({
     watchlist: z.array(WatchlistItemSchema),
-    count: z.number()
-  })
+    count: z.number(),
+  }),
 });
 
 /**
@@ -51,8 +54,8 @@ export const AddWatchlistResponseSchema = z.object({
   success: z.literal(true),
   data: z.object({
     message: z.string(),
-    watchlistItem: WatchlistItemSchema
-  })
+    watchlistItem: WatchlistItemSchema,
+  }),
 });
 
 /**
@@ -62,8 +65,8 @@ export const RemoveWatchlistResponseSchema = z.object({
   success: z.literal(true),
   data: z.object({
     message: z.string(),
-    symbol: z.string()
-  })
+    symbol: z.string(),
+  }),
 });
 
 /**
@@ -73,8 +76,8 @@ export const WatchlistStatusResponseSchema = z.object({
   success: z.literal(true),
   data: z.object({
     isInWatchlist: z.boolean(),
-    symbol: z.string()
-  })
+    symbol: z.string(),
+  }),
 });
 
 /**
@@ -84,7 +87,7 @@ export const ApiErrorSchema = z.object({
   success: z.literal(false),
   error: z.string(),
   code: z.string().optional(),
-  details: z.any().optional()
+  details: z.any().optional(),
 });
 
 /**
