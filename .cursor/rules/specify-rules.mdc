@@ -1,0 +1,30 @@
+﻿# signalix Development Guidelines
+
+Auto-generated from all feature plans. Last updated: 2025-10-23
+
+## Active Technologies
+
+- TypeScript 5+, Next.js 15+, React 19+ + Better Auth (인증), Mongoose (데이터베이스), Tailwind CSS (스타일링), Radix UI (컴포넌트) (001-user-watchlist)
+
+## Project Structure
+
+```text
+backend/
+frontend/
+tests/
+```
+
+## Commands
+
+pnpm test; pnpm run lint
+
+## Code Style
+
+TypeScript 5+, Next.js 15+, React 19+: Follow standard conventions
+
+## Recent Changes
+
+- 001-user-watchlist: Added TypeScript 5+, Next.js 15+, React 19+ + Better Auth (인증), Mongoose (데이터베이스), Tailwind CSS (스타일링), Radix UI (컴포넌트)
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->
