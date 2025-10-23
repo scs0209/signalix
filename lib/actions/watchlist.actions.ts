@@ -2,7 +2,7 @@
 
 import { Watchlist } from '@/database/models/watchlist.model';
 import { connectToDatabase } from '@/database/mongoose';
-import type { WatchlistItem, CreateWatchlistItemData } from '@/types/watchlist';
+import type { CreateWatchlistItemData, WatchlistItem } from '@/types/watchlist';
 
 /**
  * 사용자의 관심종목 목록을 조회합니다.
@@ -15,15 +15,15 @@ export async function getWatchlist(userId: string): Promise<WatchlistItem[]> {
 
   try {
     await connectToDatabase();
-    const items = await Watchlist.find({ userId }).sort({ addedAt: -1 }).lean();
-    return items.map(item => ({
-      _id: item._id.toString(),
+    const items = await Watchlist.find({ userId }).sort({ addedAt: -1 });
+    return items.map((item) => ({
+      _id: String(item._id),
       userId: item.userId,
       symbol: item.symbol,
       company: item.company,
       addedAt: item.addedAt,
-      createdAt: item.createdAt,
-      updatedAt: item.updatedAt
+      createdAt: item.addedAt, // addedAt을 createdAt으로 사용
+      updatedAt: item.addedAt, // addedAt을 updatedAt으로 사용
     }));
   } catch (error) {
     console.error('getWatchlist error:', error);
@@ -62,19 +62,19 @@ export async function addToWatchlist(userId: string, symbol: string, company: st
     const watchlistData: CreateWatchlistItemData = {
       userId,
       symbol: symbol.toUpperCase().trim(),
-      company: company.trim()
+      company: company.trim(),
     };
 
     const newItem = await Watchlist.create(watchlistData);
-    
+
     return {
-      _id: newItem._id.toString(),
+      _id: String(newItem._id),
       userId: newItem.userId,
       symbol: newItem.symbol,
       company: newItem.company,
       addedAt: newItem.addedAt,
-      createdAt: newItem.createdAt,
-      updatedAt: newItem.updatedAt
+      createdAt: newItem.addedAt,
+      updatedAt: newItem.addedAt,
     };
   } catch (error) {
     console.error('addToWatchlist error:', error);
@@ -96,12 +96,12 @@ export async function removeFromWatchlist(userId: string, symbol: string): Promi
 
   try {
     await connectToDatabase();
-    
-    const result = await Watchlist.deleteOne({ 
-      userId, 
-      symbol: symbol.toUpperCase().trim() 
+
+    const result = await Watchlist.deleteOne({
+      userId,
+      symbol: symbol.toUpperCase().trim(),
     });
-    
+
     return result.deletedCount > 0;
   } catch (error) {
     console.error('removeFromWatchlist error:', error);
@@ -121,12 +121,12 @@ export async function checkWatchlistStatus(userId: string, symbol: string): Prom
 
   try {
     await connectToDatabase();
-    
-    const item = await Watchlist.findOne({ 
-      userId, 
-      symbol: symbol.toUpperCase().trim() 
+
+    const item = await Watchlist.findOne({
+      userId,
+      symbol: symbol.toUpperCase().trim(),
     });
-    
+
     return !!item;
   } catch (error) {
     console.error('checkWatchlistStatus error:', error);
