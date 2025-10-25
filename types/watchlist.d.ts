@@ -98,17 +98,6 @@ export interface WatchlistDuplicateError extends Error {
 }
 
 /**
- * 관심종목 관련 상수
- */
-export const WATCHLIST_CONSTANTS = {
-  MAX_ITEMS_PER_USER: 50,
-  SYMBOL_MAX_LENGTH: 10,
-  COMPANY_MAX_LENGTH: 100,
-  CACHE_TTL_SECONDS: 300, // 5분
-  STATUS_CACHE_TTL_SECONDS: 60, // 1분
-} as const;
-
-/**
  * 관심종목 작업 타입
  */
 export type WatchlistAction = 'add' | 'remove' | 'check' | 'list';

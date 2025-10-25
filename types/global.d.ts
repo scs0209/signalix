@@ -1,3 +1,5 @@
+import type * as WatchlistTypes from './watchlist';
+
 declare global {
   type User = {
     id: string;
@@ -73,7 +75,19 @@ declare global {
     renderAs?: 'button' | 'text';
     label?: string;
     initialStocks: StockWithWatchlistStatus[];
-};
+  };
+
+  // Watchlist 타입들을 global로 선언
+  type WatchlistItem = WatchlistTypes.WatchlistItem;
+  type CreateWatchlistItemData = WatchlistTypes.CreateWatchlistItemData;
+  type WatchlistFilter = WatchlistTypes.WatchlistFilter;
+  type WatchlistResult = WatchlistTypes.WatchlistResult;
+  type AddWatchlistResult = WatchlistTypes.AddWatchlistResult;
+  type RemoveWatchlistResult = WatchlistTypes.RemoveWatchlistResult;
+  type WatchlistStatusResult = WatchlistTypes.WatchlistStatusResult;
+  type GetWatchlistResult = WatchlistTypes.GetWatchlistResult;
+  type WatchlistAction = WatchlistTypes.WatchlistAction;
+  type WatchlistEvent = WatchlistTypes.WatchlistEvent;
 }
 
 export {};
