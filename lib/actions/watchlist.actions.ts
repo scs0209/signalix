@@ -2,7 +2,7 @@
 
 import { Watchlist } from '@/database/models/watchlist.model';
 import { connectToDatabase } from '@/database/mongoose';
-import type { CreateWatchlistItemData, WatchlistItem } from '@/types/watchlist';
+import { WATCHLIST_CONSTANTS } from '@/lib/constants';
 
 /**
  * 사용자의 관심종목 목록을 조회합니다.
@@ -162,4 +162,32 @@ export async function getWatchlistSymbolsByEmail(email: string): Promise<string[
     console.error('getWatchlistSymbolsByEmail error:', err);
     return [];
   }
+}
+
+export async function getWatchlistCount(userId: string): Promise<number> {
+  try {
+    await connectToDatabase();
+    return await Watchlist.countDocuments({ userId });
+  } catch (error) {
+    console.error('Error getting watchlist count:', error);
+    return 0;
+  }
+}
+
+/**
+ * 관심종목 제한 확인
+ */
+export async function checkWatchlistLimit(userId: string): Promise<{
+  canAdd: boolean;
+  current: number;
+  limit: number;
+}> {
+  const current = await getWatchlistCount(userId);
+  const limit = WATCHLIST_CONSTANTS.MAX_ITEMS_PER_USER;
+  
+  return {
+    canAdd: current < limit,
+    current,
+    limit,
+  };
 }
