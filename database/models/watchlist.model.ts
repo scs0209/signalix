@@ -10,11 +10,22 @@ export interface WatchlistItem extends Document {
 const WatchlistSchema = new Schema<WatchlistItem>(
   {
     userId: { type: String, required: true, index: true },
-    symbol: { type: String, required: true, uppercase: true, trim: true },
-    company: { type: String, required: true, trim: true },
+    symbol: {
+      type: String,
+      required: true,
+      uppercase: true,
+      trim: true,
+      maxlength: [10, 'Symbol cannot exceed 10 characters'],
+    },
+    company: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [200, 'Company name cannot exceed 100 characters'],
+    },
     addedAt: { type: Date, default: Date.now },
   },
-  { timestamps: false },
+  { timestamps: true },
 );
 
 // Prevent duplicate symbols per user
