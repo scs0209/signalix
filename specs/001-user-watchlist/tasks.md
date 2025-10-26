@@ -34,23 +34,23 @@
 
 **⚠️ CRITICAL**: 이 단계가 완료되기 전까지는 어떤 사용자 스토리 작업도 시작할 수 없습니다
 
-- [ ] T005 Extend existing WatchlistItem model in database/models/watchlist.model.ts
-- [ ] T006 [P] Create watchlist business logic in lib/actions/watchlist.actions.ts
-- [ ] T007 [P] Implement authentication middleware for API routes
-- [ ] T008 [P] Create error handling utilities in lib/utils.ts
-- [ ] T009 Setup database indexes for watchlist performance optimization
-- [ ] T010 [P] Create Zod validation schemas for WatchlistItem in lib/schemas/watchlist.ts
-- [ ] T011 [P] Implement database migration scripts for watchlist schema in database/migrations/
-- [ ] T012 [P] Add data validation middleware for watchlist operations in lib/middleware/validation.ts
-- [ ] T013 [P] Create database seed scripts for testing in database/seeds/watchlist.seed.ts
-- [ ] T014 [P] Implement input sanitization for watchlist data in lib/utils/sanitization.ts
-- [ ] T015 [P] Add CSRF protection for watchlist API endpoints in lib/middleware/csrf.ts
-- [ ] T016 [P] Implement rate limiting per user for watchlist operations in lib/middleware/rateLimit.ts
-- [ ] T017 [P] Add audit logging for watchlist operations in lib/utils/audit.ts
-- [ ] T018 [P] Create unit tests for WatchlistButton component in test/unit/WatchlistButton.test.tsx
-- [ ] T019 [P] Create unit tests for watchlist business logic in test/unit/watchlist.actions.test.ts
-- [ ] T020 [P] Create integration tests for watchlist API endpoints in test/integration/watchlist-api.test.ts
-- [ ] T021 [P] Create E2E tests for watchlist user flows in test/e2e/watchlist.spec.ts
+- [x] T005 Extend existing WatchlistItem model in database/models/watchlist.model.ts
+- [x] T006 [P] Create watchlist business logic in lib/actions/watchlist.actions.ts
+- [x] T007 [P] Implement authentication middleware for API routes
+- [x] T008 [P] Create error handling utilities in lib/utils.ts
+- [x] T009 Setup database indexes for watchlist performance optimization
+- [x] T010 [P] Create Zod validation schemas for WatchlistItem in lib/schemas/watchlist.ts
+- [x] T011 [P] Implement database migration scripts for watchlist schema in database/migrations/
+- [x] T012 [P] Add data validation middleware for watchlist operations in lib/middleware/validation.ts
+- [x] T013 [P] Create database seed scripts for testing in database/seeds/watchlist.seed.ts
+- [x] T014 [P] Implement input sanitization for watchlist data in lib/utils/sanitization.ts
+- [x] T015 [P] Add CSRF protection for watchlist API endpoints in lib/middleware/csrf.ts
+- [x] T016 [P] Implement rate limiting per user for watchlist operations in lib/middleware/rateLimit.ts
+- [x] T017 [P] Add audit logging for watchlist operations in lib/utils/audit.ts
+- [x] T018 [P] Create unit tests for WatchlistButton component in test/unit/WatchlistButton.test.tsx
+- [x] T019 [P] Create unit tests for watchlist business logic in test/unit/watchlist.actions.test.ts
+- [x] T020 [P] Create integration tests for watchlist API endpoints in test/integration/watchlist-api.test.ts
+- [x] T021 [P] Create E2E tests for watchlist user flows in test/e2e/watchlist.spec.ts
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
