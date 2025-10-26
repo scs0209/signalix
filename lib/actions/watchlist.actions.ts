@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidateTag, unstable_cache } from 'next/cache';
 import { Watchlist } from '@/database/models/watchlist.model';
 import { connectToDatabase } from '@/database/mongoose';
 import { WATCHLIST_CONSTANTS } from '@/lib/constants';
@@ -13,22 +14,30 @@ import { WATCHLIST_CONSTANTS } from '@/lib/constants';
 export async function getWatchlist(userId: string): Promise<WatchlistItem[]> {
   if (!userId) return [];
 
-  try {
-    await connectToDatabase();
-    const items = await Watchlist.find({ userId }).sort({ addedAt: -1 });
-    return items.map((item) => ({
-      _id: String(item._id),
-      userId: item.userId,
-      symbol: item.symbol,
-      company: item.company,
-      addedAt: item.addedAt,
-      createdAt: item.addedAt, // addedAt을 createdAt으로 사용
-      updatedAt: item.addedAt, // addedAt을 updatedAt으로 사용
-    }));
-  } catch (error) {
-    console.error('getWatchlist error:', error);
-    return [];
-  }
+  return unstable_cache(
+    async () => {
+      try {
+        await connectToDatabase();
+        const items = await Watchlist.find({ userId }).sort({ addedAt: -1 });
+        return items.map((item) => ({
+          _id: String(item._id),
+          userId: item.userId,
+          symbol: item.symbol,
+          company: item.company,
+          addedAt: item.addedAt,
+          createdAt: item.addedAt,
+          updatedAt: item.addedAt,
+        }));
+      } catch (error) {
+        console.error('getWatchlist error:', error);
+        return [];
+      }
+    },
+    [`watchlist-${userId}`],
+    {
+      tags: ['watchlist', `watchlist-${userId}`],
+    },
+  )();
 }
 
 /**
@@ -67,6 +76,11 @@ export async function addToWatchlist(userId: string, symbol: string, company: st
 
     const newItem = await Watchlist.create(watchlistData);
 
+    // 캐시 무효화
+    revalidateTag('watchlist');
+    revalidateTag(`watchlist-${userId}`);
+    revalidateTag(`watchlist-${symbol.toUpperCase()}`);
+
     return {
       _id: String(newItem._id),
       userId: newItem.userId,
@@ -102,6 +116,11 @@ export async function removeFromWatchlist(userId: string, symbol: string): Promi
       symbol: symbol.toUpperCase().trim(),
     });
 
+    // 캐시 무효화
+    revalidateTag('watchlist');
+    revalidateTag(`watchlist-${userId}`);
+    revalidateTag(`watchlist-${symbol.toUpperCase()}`);
+
     return result.deletedCount > 0;
   } catch (error) {
     console.error('removeFromWatchlist error:', error);
@@ -119,19 +138,27 @@ export async function removeFromWatchlist(userId: string, symbol: string): Promi
 export async function checkWatchlistStatus(userId: string, symbol: string): Promise<boolean> {
   if (!userId || !symbol) return false;
 
-  try {
-    await connectToDatabase();
+  return unstable_cache(
+    async () => {
+      try {
+        await connectToDatabase();
 
-    const item = await Watchlist.findOne({
-      userId,
-      symbol: symbol.toUpperCase().trim(),
-    });
+        const item = await Watchlist.findOne({
+          userId,
+          symbol: symbol.toUpperCase().trim(),
+        });
 
-    return !!item;
-  } catch (error) {
-    console.error('checkWatchlistStatus error:', error);
-    return false;
-  }
+        return !!item;
+      } catch (error) {
+        console.error('checkWatchlistStatus error:', error);
+        return false;
+      }
+    },
+    [`watchlist-status-${userId}-${symbol.toUpperCase()}`],
+    {
+      tags: ['watchlist', `watchlist-${userId}`, `watchlist-${symbol.toUpperCase()}`],
+    },
+  )();
 }
 
 /**
@@ -148,7 +175,6 @@ export async function getWatchlistSymbolsByEmail(email: string): Promise<string[
     const db = mongoose.connection.db;
     if (!db) throw new Error('MongoDB connection not found');
 
-    // Better Auth stores users in the "user" collection
     const user = await db.collection('user').findOne<{ _id?: unknown; id?: string; email?: string }>({ email });
 
     if (!user) return [];
@@ -184,7 +210,7 @@ export async function checkWatchlistLimit(userId: string): Promise<{
 }> {
   const current = await getWatchlistCount(userId);
   const limit = WATCHLIST_CONSTANTS.MAX_ITEMS_PER_USER;
-  
+
   return {
     canAdd: current < limit,
     current,
