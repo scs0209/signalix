@@ -310,3 +310,14 @@ export const COMPANY_FINANCIALS_WIDGET_CONFIG = (symbol: string) => ({
   displayMode: 'regular',
   largeChartUrl: '',
 });
+
+/**
+ * 관심종목 관련 상수
+ */
+export const WATCHLIST_CONSTANTS = {
+  MAX_ITEMS_PER_USER: 50,
+  SYMBOL_MAX_LENGTH: 10,
+  COMPANY_MAX_LENGTH: 100,
+  CACHE_TTL_SECONDS: 300, // 5분
+  STATUS_CACHE_TTL_SECONDS: 60, // 1분
+} as const;
