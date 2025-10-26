@@ -19,7 +19,7 @@ export default defineConfig({
       '**/dist/**',
       '**/.{idea,git,cache,output,temp}/**',
       '**/{karma,rollup,webpack,vite,vitest,jest,ava,babel,nyc,cypress,tsup,build}.config.*',
-      '**/test/browser/**', // Exclude browser tests from unit test runs
+      '**/test/e2e/**', // Exclude E2E tests from unit test runs
     ],
   },
   resolve: {
