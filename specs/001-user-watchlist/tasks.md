@@ -64,21 +64,21 @@
 
 ### Implementation for User Story 1
 
-- [ ] T010 [P] [US1] Implement GET /api/watchlist endpoint in app/api/watchlist/route.ts
-- [ ] T011 [P] [US1] Implement POST /api/watchlist/[symbol] endpoint in app/api/watchlist/[symbol]/route.ts
-- [ ] T012 [P] [US1] Implement DELETE /api/watchlist/[symbol] endpoint in app/api/watchlist/[symbol]/route.ts
-- [ ] T013 [US1] Update WatchlistButton component to handle authentication in components/WatchlistButton.tsx
-- [ ] T014 [US1] Add watchlist toggle functionality to WatchlistButton component
-- [ ] T015 [US1] Integrate WatchlistButton with stock detail page in app/(main)/stocks/[symbol]/page.tsx
-- [ ] T016 [US1] Add error handling and user feedback for watchlist operations
-- [ ] T017 [US1] Add loading states and optimistic updates to WatchlistButton
-- [ ] T018 [P] [US1] Implement API response validation using Zod schemas per contracts
-- [ ] T019 [P] [US1] Add API error response formatting per contracts specification
-- [ ] T020 [P] [US1] Implement API rate limiting headers per contracts
-- [ ] T021 [P] [US1] Add API request/response logging per contracts
-- [ ] T022 [P] [US1] Implement API authentication validation per contracts
-- [ ] T023 [P] [US1] Add unit tests for watchlist API endpoints in test/unit/watchlist-api.test.ts
-- [ ] T024 [P] [US1] Add component tests for WatchlistButton authentication in test/unit/WatchlistButton.auth.test.tsx
+- [x] T010 [P] [US1] Implement GET /api/watchlist endpoint in app/api/watchlist/route.ts
+- [x] T011 [P] [US1] Implement POST /api/watchlist/[symbol] endpoint in app/api/watchlist/[symbol]/route.ts
+- [x] T012 [P] [US1] Implement DELETE /api/watchlist/[symbol] endpoint in app/api/watchlist/[symbol]/route.ts
+- [x] T013 [US1] Update WatchlistButton component to handle authentication in components/WatchlistButton.tsx
+- [x] T014 [US1] Add watchlist toggle functionality to WatchlistButton component
+- [x] T015 [US1] Integrate WatchlistButton with stock detail page in app/(main)/stocks/[symbol]/page.tsx
+- [x] T016 [US1] Add error handling and user feedback for watchlist operations
+- [x] T017 [US1] Add loading states and optimistic updates to WatchlistButton
+- [x] T018 [P] [US1] Implement API response validation using Zod schemas per contracts
+- [x] T019 [P] [US1] Add API error response formatting per contracts specification
+- [x] T020 [P] [US1] Implement API rate limiting headers per contracts
+- [x] T021 [P] [US1] Add API request/response logging per contracts
+- [x] T022 [P] [US1] Implement API authentication validation per contracts
+- [x] T023 [P] [US1] Add unit tests for watchlist API endpoints in test/unit/watchlist-api.test.ts
+- [x] T024 [P] [US1] Add component tests for WatchlistButton authentication in test/unit/WatchlistButton.auth.test.tsx
 
 **Checkpoint**: At this point, User Story 1 should be fully functional and testable independently
 
