@@ -1,0 +1,49 @@
+﻿---
+alwaysApply: false
+---
+
+# signalix 개발 가이드라인
+
+모든 기능 계획에서 자동 생성됨. 마지막 업데이트: 2025-10-23
+
+## 활성 기술 스택
+
+- TypeScript 5+, Next.js 15+, React 19+ + Better Auth (인증), Mongoose (데이터베이스), Tailwind CSS (스타일링), Radix UI (컴포넌트) (001-user-watchlist)
+
+## Project Structure
+
+```text
+app/                    # Next.js App Router
+├── (auth)/            # 인증 관련 라우트
+├── (main)/            # 메인 애플리케이션 라우트
+├── api/               # API 라우트
+components/            # React 컴포넌트
+├── forms/             # 폼 컴포넌트
+├── ui/                # Shadcn UI 컴포넌트
+├── ~.tsx              # 컴포넌트 파일일
+database/              # 데이터베이스 모델 및 설정
+hooks/                 # 커스텀 React 훅
+lib/                   # 유틸리티 및 설정
+├── actions/           # 서버 액션
+├── better-auth/       # 인증 설정
+├── schemas/           # 유효성 검사 스키마
+public/                # 정적 자산
+specs/                 # 기능 명세서
+test/                  # 테스트 파일
+types/                 # TypeScript 타입 정의
+```
+
+## 명령어
+
+pnpm test; pnpm run lint
+
+## 코드 스타일
+
+TypeScript 5+, Next.js 15+, React 19+: 표준 컨벤션 준수
+
+## 최근 변경사항
+
+- 001-user-watchlist: TypeScript 5+, Next.js 15+, React 19+ + Better Auth (인증), Mongoose (데이터베이스), Tailwind CSS (스타일링), Radix UI (컴포넌트) 추가
+
+<!-- MANUAL ADDITIONS START -->
+<!-- MANUAL ADDITIONS END -->

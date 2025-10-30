@@ -7,12 +7,10 @@
 ```
 test/
 ├── unit/           # 단위 테스트 (Vitest)
-├── browser/        # 브라우저 테스트 (Vitest with Playwright)
+├── integration/    # 통합 테스트 (Vitest)
+├── e2e/            # E2E 테스트 (Playwright)
 ├── setup.ts        # 테스트 설정 파일
 └── vitest.d.ts     # TypeScript 타입 선언
-
-tests/
-└── e2e/            # E2E 테스트 (Playwright)
 ```
 
 ## 테스트 실행
@@ -33,9 +31,6 @@ pnpm test:coverage
 
 # 특정 파일만 실행
 pnpm test:filter [파일명]
-
-# 브라우저 테스트 실행
-pnpm test:browser
 ```
 
 ### E2E 테스트 (Playwright)
@@ -63,13 +58,13 @@ pnpm test:all
 - `.test.tsx` 또는 `.test.ts` 확장자 사용
 - `@testing-library/react`와 `@testing-library/user-event`에서 테스트 유틸리티 import
 
-### 브라우저 테스트
-- `test/browser/` 디렉토리에 브라우저 테스트 파일을 배치
-- `.browser.test.ts` 확장자 사용
-- 실제 브라우저 환경에서 테스트 실행
+### 통합 테스트
+- `test/integration/` 디렉토리에 통합 테스트 파일을 배치
+- `.test.ts` 확장자 사용
+- API route handler를 직접 호출하여 테스트
 
 ### E2E 테스트
-- `tests/e2e/` 디렉토리에 E2E 테스트 파일을 배치
+- `test/e2e/` 디렉토리에 E2E 테스트 파일을 배치
 - `.spec.ts` 확장자 사용
 - 전체 애플리케이션 플로우를 테스트
 

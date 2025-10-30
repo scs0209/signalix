@@ -18,9 +18,10 @@ import { signOut } from '@/lib/actions/auth.actions';
 
 interface UserAvatarProps {
   user: User;
+  initialStocks: StockWithWatchlistStatus[];
 }
 
-const UserAvatar = ({ user }: UserAvatarProps) => {
+const UserAvatar = ({ user, initialStocks }: UserAvatarProps) => {
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -72,7 +73,7 @@ const UserAvatar = ({ user }: UserAvatarProps) => {
         </DropdownMenuItem>
         <DropdownMenuSeparator className='hidden sm:block bg-gray-600' />
         <nav className='sm:hidden'>
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
       </DropdownMenuContent>
     </DropdownMenu>
