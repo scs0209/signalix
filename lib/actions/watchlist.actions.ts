@@ -68,9 +68,10 @@ export async function addToWatchlist(userId: string, symbol: string, company: st
       throw new Error('Stock already in watchlist');
     }
 
+    const normalizedSymbol = symbol.toUpperCase().trim();
     const watchlistData: CreateWatchlistItemData = {
       userId,
-      symbol: symbol.toUpperCase().trim(),
+      symbol: normalizedSymbol,
       company: company.trim(),
     };
 
@@ -79,7 +80,7 @@ export async function addToWatchlist(userId: string, symbol: string, company: st
     // 캐시 무효화
     revalidateTag('watchlist');
     revalidateTag(`watchlist-${userId}`);
-    revalidateTag(`watchlist-${symbol.toUpperCase()}`);
+    revalidateTag(`watchlist-${normalizedSymbol}`);
 
     return {
       _id: String(newItem._id),
@@ -111,15 +112,16 @@ export async function removeFromWatchlist(userId: string, symbol: string): Promi
   try {
     await connectToDatabase();
 
+    const normalizedSymbol = symbol.toUpperCase().trim();
     const result = await Watchlist.deleteOne({
       userId,
-      symbol: symbol.toUpperCase().trim(),
+      symbol: normalizedSymbol,
     });
 
     // 캐시 무효화
     revalidateTag('watchlist');
     revalidateTag(`watchlist-${userId}`);
-    revalidateTag(`watchlist-${symbol.toUpperCase()}`);
+    revalidateTag(`watchlist-${normalizedSymbol}`);
 
     return result.deletedCount > 0;
   } catch (error) {
@@ -142,10 +144,10 @@ export async function checkWatchlistStatus(userId: string, symbol: string): Prom
     async () => {
       try {
         await connectToDatabase();
-
+        const normalizedSymbol = symbol.toUpperCase().trim();
         const item = await Watchlist.findOne({
           userId,
-          symbol: symbol.toUpperCase().trim(),
+          symbol: normalizedSymbol,
         });
 
         return !!item;
@@ -154,9 +156,15 @@ export async function checkWatchlistStatus(userId: string, symbol: string): Prom
         return false;
       }
     },
-    [`watchlist-status-${userId}-${symbol.toUpperCase()}`],
+    (() => {
+      const normalizedSymbol = symbol.toUpperCase().trim();
+      return [`watchlist-status-${userId}-${normalizedSymbol}`];
+    })(),
     {
-      tags: ['watchlist', `watchlist-${userId}`, `watchlist-${symbol.toUpperCase()}`],
+      tags: (() => {
+        const normalizedSymbol = symbol.toUpperCase().trim();
+        return ['watchlist', `watchlist-${userId}`, `watchlist-${normalizedSymbol}`];
+      })(),
     },
   )();
 }
