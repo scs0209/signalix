@@ -92,17 +92,17 @@
 
 ### Implementation for User Story 2
 
-- [ ] T018 [P] [US2] Implement GET /api/watchlist/[symbol]/status endpoint in app/api/watchlist/[symbol]/status/route.ts
-- [ ] T019 [US2] Add watchlist status checking logic to WatchlistButton component
-- [ ] T020 [US2] Implement initial state loading for WatchlistButton on page load
-- [ ] T021 [US2] Add visual indicators for watchlist status (star icon, button text)
-- [ ] T022 [US2] Handle authentication state changes in WatchlistButton
-- [ ] T023 [US2] Add offline state detection and disable functionality
-- [ ] T024 [P] [US2] Implement API response validation for status endpoint per contracts
-- [ ] T025 [P] [US2] Add API error handling for status endpoint per contracts
-- [ ] T026 [P] [US2] Implement API caching headers for status endpoint per contracts
-- [ ] T027 [P] [US2] Add unit tests for watchlist status API in test/unit/watchlist-status.test.ts
-- [ ] T028 [P] [US2] Add component tests for WatchlistButton status display in test/unit/WatchlistButton.status.test.tsx
+- [x] T018 [P] [US2] Implement GET /api/watchlist/[symbol]/status endpoint in app/api/watchlist/[symbol]/status/route.ts
+- [x] T019 [US2] Add watchlist status checking logic to WatchlistButton component
+- [x] T020 [US2] Implement initial state loading for WatchlistButton on page load
+- [x] T021 [US2] Add visual indicators for watchlist status (star icon, button text)
+- [x] T022 [US2] Handle authentication state changes in WatchlistButton
+- [x] T023 [US2] Add offline state detection and disable functionality
+- [x] T024 [P] [US2] Implement API response validation for status endpoint per contracts
+- [x] T025 [P] [US2] Add API error handling for status endpoint per contracts
+- [x] T026 [P] [US2] Implement API caching headers for status endpoint per contracts
+- [x] T027 [P] [US2] Add unit tests for watchlist status API in test/unit/watchlist-status.test.ts
+- [x] T028 [P] [US2] Add component tests for WatchlistButton status display in test/unit/WatchlistButton.status.test.tsx
 
 **Checkpoint**: At this point, User Stories 1 AND 2 should both work independently
 
